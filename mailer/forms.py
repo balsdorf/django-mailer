@@ -4,7 +4,7 @@ from django import forms
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.admin.widgets import AdminTextInputWidget, AdminTextareaWidget
 
-from mailer.models import Message, make_message
+from mailer.models import Message, MessageLog, make_message
 
 
 class MessageDataForm(forms.ModelForm):
@@ -54,6 +54,6 @@ class MessageForm(MessageDataForm):
 
 class MessageLogForm(MessageDataForm):
     class Meta:
-        model = Message
+        model = MessageLog
         fields = ('from_email', 'to', 'subject', 'body', 'body_html',
                 'when_added', 'priority', 'when_attempted', 'result', 'log_message')

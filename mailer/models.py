@@ -4,6 +4,7 @@ import pickle
 
 from django.core.mail import EmailMessage
 from django.db import models
+from django.utils.timezone import now
 
 
 PRIORITIES = (
@@ -91,7 +92,7 @@ class Message(models.Model):
     
     # The actual data - a pickled EmailMessage
     message_data = models.TextField()
-    when_added = models.DateTimeField(auto_now_add=True)
+    when_added = models.DateTimeField(default=now())
     priority = models.CharField(max_length=1, choices=PRIORITIES, default="2")
     connection_kwargs_data = models.TextField()
     # @@@ campaign?
@@ -276,7 +277,7 @@ class MessageLog(models.Model):
     # @@@ campaign?
     
     # additional logging fields
-    when_attempted = models.DateTimeField(auto_now_add=True)
+    when_attempted = models.DateTimeField(default=now())
     result = models.CharField(max_length=1, choices=RESULT_CODES)
     log_message = models.TextField()
     
